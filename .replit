@@ -2,14 +2,15 @@ run = "vite"
 entrypoint = "src/App.tsx"
 
 hidden = [".config", "tsconfig.json", "tsconfig.node.json", "vite.config.js", ".gitignore"]
+compile = "./.config/build.sh"
 
 [nix]
 channel = "stable-22_11"
 
 [env]
-PATH = "/home/runner/$REPL_SLUG/.config/npm/node_global/bin:/home/runner/$REPL_SLUG/node_modules/.bin"
 XDG_CONFIG_HOME = "/home/runner/.config"
 npm_config_prefix = "/home/runner/$REPL_SLUG/.config/npm/node_global"
+PATH = "/home/runner/$REPL_SLUG/.config/npm/node_global/bin:/home/runner/$REPL_SLUG/node_modules/.bin"
 
 [packager]
 language = "nodejs"
@@ -24,3 +25,6 @@ pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
 
   [languages.javascript.languageServer]
 start = "./node_modules/.bin/typescript-language-server --stdio"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", ".config"]

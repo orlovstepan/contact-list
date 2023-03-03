@@ -4,11 +4,12 @@ import Add from './Add';
 
 type Props = {
   users: User[],
-  usersArr: User[]
-  setUsers: (user:User) => void
+  setUser: (user: User) => void,
+  resetSearchValue: (value: string) => void,
+  deleteUser: (id: number) => void
 }
 
-function Table({ setUsers, usersArr, users }: Props) {
+function Table({ setUser, deleteUser, resetSearchValue, users }: Props) {
   return (
     <div className="table" >
       <div className="table--upperRow">
@@ -16,14 +17,14 @@ function Table({ setUsers, usersArr, users }: Props) {
         <p className="label">Phone </p>
         <p className="label">Email </p>
       </div>
-      <Contact usersArr={usersArr} setUsers={setUsers} users={users} />
+      <Contact deleteUser={deleteUser}  setUser={setUser} resetSearchValue={resetSearchValue} users={users} />
     </div>
   )
 }
 
 export default Table
 
-function Contact({ setUsers, usersArr, users }: Props) {
+function Contact({ setUser, deleteUser, resetSearchValue, users }: Props) {
 
   const [copied, setCopied] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -37,8 +38,11 @@ function Contact({ setUsers, usersArr, users }: Props) {
     }
   }
 
-  const handleAdd = () => {
-    setShowModal(!showModal);
+  const handleAdd = (user: User) => {
+    resetSearchValue("");
+    setUser(user);
+    handleClose();
+    
   }
 
   const handleClose = () => {
@@ -48,17 +52,18 @@ function Contact({ setUsers, usersArr, users }: Props) {
   return (
     <div>
       <ul>
-        {users.map(user => <li id={user.id % 2 ? "even" : "odd"} key={user.id} className="container" >
+        {users.map((user, index) => <li id={index % 2 ? "even" : "odd"} key={user.id} className="container" >
           <p className="info">{user.name} </p>
           <p className="info">{user.phone} </p>
           <p className="info" id="email" onClick={() => copyEmail(user.email)}>
             {user.email}
             <img src={copied === user.email ? "tick.png" : "copy.png"} className="copy" />
           </p>
+          <button onClick={() => deleteUser(user.id)} >🗑️</button>
         </li>)}
       </ul>
-      <button onClick={handleAdd} className='btn-add'>+</button>
-      {showModal && <Add usersArr={usersArr} setUsers={setUsers} handleClose={handleClose} showModal={showModal} />}
+      <button onClick={() => setShowModal(true)} className='btn-add'>+</button>
+      {showModal && <Add onAdd={handleAdd} handleClose={handleClose} showModal={showModal} />}
     </div>
   )
 }

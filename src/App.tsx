@@ -1,5 +1,5 @@
 import './App.css'
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import Searchbar from './Components/Searchbar';
 import Table from './Components/Table';
 import { User, TypeSearch } from './type';
@@ -8,7 +8,7 @@ export default function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [value, setValue] = useState('');
   const [type, setSearchType] = useState<TypeSearch>('name');
-  
+
   const filterUsers = (searchValue: string, users: User[]) => {
     return users.filter(user => user[type].toLowerCase().includes(searchValue.toLowerCase()));
   }
@@ -20,23 +20,27 @@ export default function App() {
   }
 
   useEffect(() => {
-      fetchUsers();
+    fetchUsers();
   }, [])
 
   const onChange = (value: string) => {
     setValue(value)
   }
-  
+
+  const onAdd = (user: User) => {
+    setUsers([...users, user]);
+  }
+
+  const onDelete = (id: number) => {
+    setUsers(users.filter(user => id !== user.id))
+  }
+
   return (
     <main>
       <div className='elements'>
         <Searchbar value={value} handleChange={onChange} handleChangeType={setSearchType} />
-        <Table setUsers={setUsers} usersArr={users} users={filterUsers(value, users)} />
+        <Table deleteUser={onDelete} resetSearchValue={setValue} setUser={onAdd} users={filterUsers(value, users)} />
       </div>
     </main>
   )
 }
-
-
-
-//https://jsonplaceholder.typicode.com/users

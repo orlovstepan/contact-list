@@ -4,22 +4,21 @@ import { User } from "../type"
 type Props = {
   handleClose: () => void,
   showModal: boolean,
-  setUsers: (user: User) => void,
-  usersArr: User[]
+  onAdd: (user: User) => void,
 }
 
-function Add({handleClose, usersArr, setUsers}: Props) {
+function Add({handleClose, showModal, onAdd}: Props) {
 
   const [user, setUser] = useState<User>(
     { 
       name: '',
       phone: '',
-      id: usersArr.length+1,
+      id: new Date().valueOf(), // 823230245000
       email: ''
     }
   )
   
-  const handleChange = (e: React.SyntheticEvent): void => {
+  const handleChange = (e: any): void => {
     setUser(prev => {
       return {
         ...prev,
@@ -28,9 +27,9 @@ function Add({handleClose, usersArr, setUsers}: Props) {
     })
   }
 
-  const handleAdd = (e: any): void =>{
+  const handleAdd = (e: any) =>{
     e.preventDefault();
-    setUsers(user)
+    onAdd(user)
   }
 
   return (
@@ -41,7 +40,7 @@ function Add({handleClose, usersArr, setUsers}: Props) {
         <input name="name" value={user.name} placeholder="name" onChange={handleChange}></input>
         <input name="phone" value={user.phone} placeholder="phone" onChange={handleChange}></input>
         <input name="email" value={user.email} placeholder="email" onChange={handleChange}></input>
-        <button onClick={(e)=>handleAdd(e)} className="button--add">add</button>
+        <button onClick={handleAdd} className="button--add">add</button>
       </form>
         </div>
     </div>
