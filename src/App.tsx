@@ -36,11 +36,9 @@ export default function App() {
   }
 
   return (
-    <main>
-      <div className='elements'>
+    <main className='App'>
         <Searchbar value={value} handleChange={onChange} handleChangeType={setSearchType} />
         <Table deleteUser={onDelete} resetSearchValue={setValue} setUser={onAdd} users={filterUsers(value, users)} />
-      </div>
     </main>
   )
 }
