@@ -37,7 +37,7 @@ export default function App() {
 
   return (
     <main className='App'>
-        <Searchbar value={value} handleChange={onChange} handleChangeType={setSearchType} />
+        <Searchbar resetSearchValue={setValue} setUser={onAdd} value={value} handleChange={onChange} handleChangeType={setSearchType} />
         <Table deleteUser={onDelete} resetSearchValue={setValue} setUser={onAdd} users={filterUsers(value, users)} />
     </main>
   )

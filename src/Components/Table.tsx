@@ -13,10 +13,7 @@ type Props = {
 function Table({ setUser, deleteUser, resetSearchValue, users }: Props) {
 
   const [checked, setChecked] = useState<Number[]>([]);
-
-  console.log('checked',checked)
-
-
+  const [showModal, setShowModal] = useState(false);
 
   const handleCheckEach = (id: number, e: any) =>{
     const value = checked.filter(userId => id!==userId);
@@ -27,12 +24,23 @@ function Table({ setUser, deleteUser, resetSearchValue, users }: Props) {
     setChecked(users.length === checked.length ? [] : users.map(user=>user.id))
   }
 
+  const handleAdd = (user: User) => {
+    resetSearchValue("");
+    setUser(user);
+    handleClose();
+    
+  }
+
+  const handleClose = () => {
+    setShowModal(!showModal);
+  }
+
   return (
     <table className="table" >
       <thead>
       <tr className="table--upperRow">
         <td><input onChange={(e)=>handleCheckAll(e)}
-         name="check--all" type={'checkbox'}/></td>
+         name="check--all" type={'checkbox'} checked={checked.length === users.length ? true : false}/></td>
         <th className="label"> Name </th>
         <th className="label">Phone </th>
         <th className="label">Email </th>
@@ -72,7 +80,6 @@ export default Table
 function Contact({ setUser, deleteUser, resetSearchValue, users }: Props) {
 
   const [copied, setCopied] = useState('');
-  const [showModal, setShowModal] = useState(false);
 
   const copyEmail = async (email: string) => {
     try {
@@ -83,16 +90,7 @@ function Contact({ setUser, deleteUser, resetSearchValue, users }: Props) {
     }
   }
 
-  const handleAdd = (user: User) => {
-    resetSearchValue("");
-    setUser(user);
-    handleClose();
-    
-  }
-
-  const handleClose = () => {
-    setShowModal(!showModal);
-  }
+  
 
   return (
     <div>

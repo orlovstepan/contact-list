@@ -13,7 +13,7 @@ function Add({handleClose, showModal, onAdd}: Props) {
     { 
       name: '',
       phone: '',
-      id: new Date().valueOf(), // 823230245000
+      id: new Date().valueOf(),
       email: ''
     }
   )
