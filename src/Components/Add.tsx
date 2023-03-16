@@ -35,13 +35,13 @@ function Add({handleClose, showModal, onAdd}: Props) {
   return (
     <div className="add-form-modal">
       <div className="add-form-modal-content">
-      <form className="add-person">
-        <button className="button--close" onClick={handleClose}>X</button>
-        <input name="name" value={user.name} placeholder="name" onChange={handleChange}></input>
-        <input name="phone" value={user.phone} placeholder="phone" onChange={handleChange}></input>
-        <input name="email" value={user.email} placeholder="email" onChange={handleChange}></input>
-        <button onClick={handleAdd} className="button--add">add</button>
-      </form>
+            <button className="button--close" onClick={handleClose}>X</button>
+          <form className="add-person">
+            <input className="add-person--input" name="name" value={user.name} placeholder="name" onChange={handleChange}></input>
+            <input className="add-person--input" name="phone" value={user.phone} placeholder="phone" onChange={handleChange}></input>
+            <input className="add-person--input" name="email" value={user.email} placeholder="email" onChange={handleChange}></input>
+            <button onClick={handleAdd} className="button--add">add</button>
+          </form>
         </div>
     </div>
   )

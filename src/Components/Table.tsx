@@ -1,39 +1,37 @@
-import { useState } from 'react';
-import { User } from '../type'
-import Add from './Add';
+import { useState } from "react";
+import { User } from "../type";
+import Add from "./Add";
 
 type Props = {
+  checked: number[],
+  setChecked: (usersIds: number[]) => void,
   users: User[],
   setUser: (user: User) => void,
   resetSearchValue: (value: string) => void,
-  deleteUser: (id: number) => void
-}
+};
 
+function Table({
+  setUser,
+  checked,
+  setChecked,
+  resetSearchValue,
+  users,
+}: Props) {
 
-function Table({ setUser, deleteUser, resetSearchValue, users }: Props) {
-
-  const [checked, setChecked] = useState<Number[]>([]);
   const [showModal, setShowModal] = useState(false);
 
-  const handleCheckEach = (id: number, e: any) =>{
-    const value = checked.filter(userId => id!==userId);
-    setChecked(prev=> prev.includes(id) ? value : [...prev, id] );
-  }
+  const handleCheckEach = (id: number) => {
+    const value = checked.filter((userId) => id !== userId);
+    setChecked((prev: number[]) => 
+      prev.includes(id) ? value : [...prev, id]
+    );
+  };
 
-  const handleCheckAll = (e: any) =>{
-    setChecked(users.length === checked.length ? [] : users.map(user=>user.id))
-  }
-
-  const handleAdd = (user: User) => {
-    resetSearchValue("");
-    setUser(user);
-    handleClose();
-    
-  }
-
-  const handleClose = () => {
-    setShowModal(!showModal);
-  }
+  const handleCheckAll = (e: any) => {
+    setChecked(
+      users.length === checked.length ? [] : users.map((user) => user.id)
+    );
+  };
 
   return (
     <table className="table" >
@@ -50,9 +48,8 @@ function Table({ setUser, deleteUser, resetSearchValue, users }: Props) {
       {users.map((user, index) => <tr id={index % 2 ? "even" : "odd"} key={user.id} className="container" >
           <td>
             <input name="check--individual" 
-            onChange={(e)=> handleCheckEach(user.id, e)}
+            onChange={(e)=> handleCheckEach(user.id)}
             checked={checked.includes(user.id) ? true: false} 
-            className="info"
             type={'checkbox'}/>
           </td>
           <td className="info">{user.name} </td>

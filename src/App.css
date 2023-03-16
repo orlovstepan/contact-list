@@ -1,5 +1,12 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: white;
+  background-color: whitesmoke;
+  font-family: monospace;
 }
 
 .App{
@@ -9,6 +16,14 @@ body {
   flex-direction: column;
   align-self: center;
   margin: 5vw 0 0 20vw;
+  padding: 2% 1%;
+  border: 1px solid lightgray;
+  background-color: white;
+  font-family: monospace;
+}
+
+button{
+  cursor: pointer;
 }
 
 .copy {
@@ -46,7 +61,10 @@ thead{
 }
 
 .info{
+  font-size:0.83rem;
+  padding: 2%;
   height: 4vh;
+  border-bottom: 1px solid lightgray;
 } 
 
 .info,
@@ -54,13 +72,89 @@ thead{
   padding-left: 1vw;
 }
 
-#odd{
-  background-color: rgb(255, 231, 234);
+.container{
+  border: 1px solid black;
+  height: 5%;
 }
 
 .container:hover {
-  opacity: 0.7;
+  background-color: #fafafa;
 }
+
+.topBar--buttons{
+  display: flex;
+  justify-content: flex-end;
+  width: 20vw;
+}
+
+.btn-add{
+  height: 4vh;
+  margin-left: 3%;
+  padding: 0 5%;
+  background-color: rgb(220, 255, 220);
+  border: 0;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size:larger;
+  font-weight: bolder;
+  transition: transform .2s;
+}
+
+.delete--disabled{
+  border: transparent;
+  pointer-events: none;
+  background-color: salmon;
+  opacity: 0.1;
+  color: white;
+  font-family: monospace;
+  font-size:larger;
+  font-weight: bolder;
+}
+
+.delete--enabled{
+  border: transparent;
+  font-family: monospace;
+  font-size:larger;
+  font-weight: bolder;
+  background-color: salmon;
+  color: white;
+  transition: transform .2s;
+}
+
+.btn-add:hover,
+.delete--enabled:hover{
+  transform: scale(1.05); 
+}
+
+.search-input {
+  width: 35%;
+  transition: width 0.4s ease-in-out;
+  height: 4vh;
+  padding-left: 10px;
+  border: 1px solid gray;
+  font-family: monospace;
+}
+
+.search-input:focus {
+  width: 99%;
+  outline: none !important;
+  border: 1px solid lightgray;
+  box-shadow: 0 0 1px gray;
+}
+
+.topBar--select-type{
+  font-family: monospace;
+  height: 4vh;
+  color: gray;
+  padding: 0 3%;
+}
+
+.table--upperRow{
+  height: 5vh;
+  background-color: #fafafa;
+}
+
+/* MODAL WINDOW */
 
 .add-form-modal{
   position: absolute;
@@ -74,12 +168,57 @@ thead{
   background: rgba(169, 169, 169, 0.5);
 }
 
-.add-person{
-  background-color: bisque;
+.add-form-modal-content{
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 20vw;
+  height: 30vh;  
+  border-radius: 5%;
+}
+
+.add-person{
+  margin-top: 5%;
+  width: 63%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-person>*{
+  font-family: monospace;
+}
+
+.add-person--input{
+  padding-left: 3%;
+}
+
+.button--close{
+  align-self: flex-end;
+  margin: 5% 5%;
+  background-color: transparent;
+  border-radius: 40%;
+}
+
+.button--add{
+  width:5vw;
+  margin-top:10%;
+  font-weight: bold;
+  background-color: rgb(220, 255, 220);
+  border:none;
+  transition: 40ms;
+  padding: 5% 10%;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  width: 20vw;
-  height: 30vh;
+}
+
+.button--add:hover{
+  transform: scale(1.1);
+}
+
+.add-person--input{
+  margin-top: 4%;
+  height: 3.5vh;
 }
