@@ -18,8 +18,6 @@ function Table({
   users,
 }: Props) {
 
-  const [showModal, setShowModal] = useState(false);
-
   const handleCheckEach = (id: number) => {
     const value = checked.filter((userId) => id !== userId);
     setChecked((prev: number[]) => 
@@ -32,6 +30,17 @@ function Table({
       users.length === checked.length ? [] : users.map((user) => user.id)
     );
   };
+
+  const [copied, setCopied] = useState('');
+
+  const copyEmail = async (email: string) => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(email);
+    } catch (e) {
+      console.log("error in copy", e);
+    }
+  }
 
   return (
     <table className="table" >
@@ -54,12 +63,11 @@ function Table({
           </td>
           <td className="info">{user.name} </td>
           <td className="info">{user.phone} </td>
-          <td className="info" id="email" // onClick={() => copyEmail(user.email)}
+          <td className="info" id="email" onClick={() => copyEmail(user.email)}
           >
             {user.email}
-            {/* <img src={copied === user.email ? "tick.png" : "copy.png"} className="copy" /> */}
+            <img src={copied === user.email ? "tick.png" : "copy.png"} className="copy" />
           </td>
-          {/* <button onClick={() => deleteUser(user.id)} >🗑️</button> */}
         </tr>)}
         </tbody>
     </table>
@@ -67,41 +75,3 @@ function Table({
 }
 
 export default Table
-
-
-
-
-
-
-////// NOT USING THIS
-function Contact({ setUser, deleteUser, resetSearchValue, users }: Props) {
-
-  const [copied, setCopied] = useState('');
-
-  const copyEmail = async (email: string) => {
-    try {
-      await navigator.clipboard.writeText(email);
-      setCopied(email);
-    } catch (e) {
-      console.log("error in copy", e);
-    }
-  }
-
-  
-
-  return (
-    <div>
-        {users.map((user, index) => <tr id={index % 2 ? "even" : "odd"} key={user.id} className="container" >
-          <td className="info">{user.name} </td>
-          <td className="info">{user.phone} </td>
-          <td className="info" id="email" onClick={() => copyEmail(user.email)}>
-            {user.email}
-            <img src={copied === user.email ? "tick.png" : "copy.png"} className="copy" />
-          </td>
-          {/* <button onClick={() => deleteUser(user.id)} >🗑️</button> */}
-        </tr>)}
-      <button onClick={() => setShowModal(true)} className='btn-add'>+</button>
-      {showModal && <Add onAdd={handleAdd} handleClose={handleClose} showModal={showModal} />}
-    </div>
-  )
-}

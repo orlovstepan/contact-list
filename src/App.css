@@ -27,10 +27,14 @@ button{
 }
 
 .copy {
-  width: 20px;
+  width: 1.1vw;
   visibility: hidden;
-  margin-left: 10px;
+  margin-left: 3%;
   pointer-events: none;
+}
+
+.info:hover .copy {
+  visibility: visible;
 }
 
 
@@ -88,7 +92,8 @@ thead{
 }
 
 .btn-add{
-  height: 4vh;
+  width: fit-content;
+  min-height: 4vh;
   margin-left: 3%;
   padding: 0 5%;
   background-color: rgb(220, 255, 220);
