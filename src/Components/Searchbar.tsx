@@ -1,6 +1,6 @@
 import { User, TypeSearch } from '../type'
-import { useState } from 'react'
-import Add from './Add';
+import AddButton from './Add-button';
+import DeleteButton from './Delete-button';
 
 type Props = {
   value: string,
@@ -14,18 +14,6 @@ type Props = {
 
 function Searchbar({value, checked, setUser, resetSearchValue, handleChange, handleChangeType, deleteUser}: Props) {
 
-  const [showModal, setShowModal] = useState(false);
-
-  const handleAdd = (user: User) => {
-    resetSearchValue("");
-    setUser(user);
-    handleClose();
-  }
-
-  const handleClose = () => {
-    setShowModal(!showModal);
-  }
-
   return (
     <div className='topBar'>
         <div className='searchbar'>
@@ -37,10 +25,9 @@ function Searchbar({value, checked, setUser, resetSearchValue, handleChange, han
         </select>
         </div>
         <div className='topBar--buttons'>
-        <button className={checked.length ? 'delete--enabled' : 'delete--disabled'} onClick={() => deleteUser(checked)}>Delete</button>
-        <button onClick={() => setShowModal(true)} className='btn-add'>Create contact</button>
+        <DeleteButton checked={checked} deleteUser={deleteUser} />
+        <AddButton setUser={setUser} resetSearchValue={resetSearchValue} />
         </div>
-        {showModal && <Add onAdd={handleAdd} handleClose={handleClose} showModal={showModal} />}
     </div>
   )
 }

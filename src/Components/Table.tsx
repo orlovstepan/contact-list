@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { User } from "../type";
-import Add from "./Add";
 import { useSelector, useDispatch } from 'react-redux'
 
 type Props = {
@@ -29,8 +28,6 @@ function Table({
   const list = useSelector(state => state.users)
 
   console.log('....', list)
-
-  
 
   const handleCheckAll = (e: any) => {
     setChecked(

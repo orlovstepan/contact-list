@@ -30,7 +30,12 @@ button{
   width: 1.1vw;
   visibility: hidden;
   margin-left: 3%;
-  pointer-events: none;
+  /* pointer-events: none; */
+}
+
+.email,
+.copy{
+  cursor: pointer;
 }
 
 .info:hover .copy {
