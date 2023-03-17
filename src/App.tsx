@@ -2,13 +2,17 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import Searchbar from "./Components/Searchbar";
 import Table from "./Components/Table";
+import { useSelector, useDispatch } from 'react-redux'
 import { User, TypeSearch } from "./type";
+import { RootState } from "./store";
+import { addUser} from './store/user'
 
 export default function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [value, setValue] = useState("");
   const [type, setSearchType] = useState<TypeSearch>("name");
   const [checked, setChecked] = useState<number[]>([]);
+  const dispatch = useDispatch();
 
 
   const filterUsers = (searchValue: string, users: User[]) => {
@@ -32,13 +36,18 @@ export default function App() {
   };
 
   const onAdd = (user: User) => {
+    dispatch(addUser(user))
     setUsers([...users, user]);
   };
 
   const onDelete = (checked: number[]) => {
-      setUsers(users.filter((user) => !checked.includes(user.id)));
-      setChecked([]);
+    setUsers(users.filter((user) => !checked.includes(user.id)));
+    setChecked([]);
   };
+
+  const store = useSelector((state: RootState) => state)
+
+  console.log('store', store)
 
   return (
     <main className="App">

@@ -10,12 +10,12 @@ body {
 }
 
 .App{
-  width: 50vw;
+  width: 60vw;
   max-width: 80vw; 
   display: flex;
   flex-direction: column;
   align-self: center;
-  margin: 5vw 0 0 20vw;
+  margin: 5vw 0 0 15vw;
   padding: 2% 1%;
   border: 1px solid lightgray;
   background-color: white;

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { User } from "../type";
 import Add from "./Add";
+import { useSelector, useDispatch } from 'react-redux'
 
 type Props = {
   checked: number[],
-  setChecked: (usersIds: number[]) => void,
+  setChecked: (value: ((ids: number[]) => void) | number[]) => void,
   users: User[],
   setUser: (user: User) => void,
   resetSearchValue: (value: string) => void,
@@ -20,10 +21,16 @@ function Table({
 
   const handleCheckEach = (id: number) => {
     const value = checked.filter((userId) => id !== userId);
-    setChecked((prev: number[]) => 
+    setChecked((prev) =>
       prev.includes(id) ? value : [...prev, id]
     );
   };
+
+  const list = useSelector(state => state.users)
+
+  console.log('....', list)
+
+  
 
   const handleCheckAll = (e: any) => {
     setChecked(
@@ -45,21 +52,21 @@ function Table({
   return (
     <table className="table" >
       <thead>
-      <tr className="table--upperRow">
-        <td><input onChange={(e)=>handleCheckAll(e)}
-         name="check--all" type={'checkbox'} checked={checked.length === users.length ? true : false}/></td>
-        <th className="label"> Name </th>
-        <th className="label">Phone </th>
-        <th className="label">Email </th>
-      </tr>
+        <tr className="table--upperRow">
+          <td><input onChange={(e) => handleCheckAll(e)}
+            name="check--all" type={'checkbox'} checked={checked.length === users.length ? true : false} /></td>
+          <th className="label"> Name </th>
+          <th className="label">Phone </th>
+          <th className="label">Email </th>
+        </tr>
       </thead>
       <tbody>
-      {users.map((user, index) => <tr id={index % 2 ? "even" : "odd"} key={user.id} className="container" >
+        {users.map((user, index) => <tr id={index % 2 ? "even" : "odd"} key={user.id} className="container" >
           <td>
-            <input name="check--individual" 
-            onChange={(e)=> handleCheckEach(user.id)}
-            checked={checked.includes(user.id) ? true: false} 
-            type={'checkbox'}/>
+            <input name="check--individual"
+              onChange={(e) => handleCheckEach(user.id)}
+              checked={checked.includes(user.id) ? true : false}
+              type={'checkbox'} />
           </td>
           <td className="info">{user.name} </td>
           <td className="info">{user.phone} </td>
@@ -69,7 +76,7 @@ function Table({
             <img src={copied === user.email ? "tick.png" : "copy.png"} className="copy" />
           </td>
         </tr>)}
-        </tbody>
+      </tbody>
     </table>
   )
 }
