@@ -63,8 +63,6 @@ export default function App() {
       <Table
         checked={checked}
         setChecked={setChecked}
-        resetSearchValue={setValue}
-        setUser={onAdd}
         users={filterUsers(value, users)}
       />
     </main>

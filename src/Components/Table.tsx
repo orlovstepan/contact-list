@@ -6,15 +6,11 @@ type Props = {
   checked: number[],
   setChecked: (value: ((ids: number[]) => void) | number[]) => void,
   users: User[],
-  setUser: (user: User) => void,
-  resetSearchValue: (value: string) => void,
 };
 
 function Table({
-  setUser,
   checked,
   setChecked,
-  resetSearchValue,
   users,
 }: Props) {
 

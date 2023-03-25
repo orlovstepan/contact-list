@@ -3,11 +3,10 @@ import { User } from "../type"
 
 type Props = {
   handleClose: () => void,
-  showModal: boolean,
   onAdd: (user: User) => void,
 }
 
-function Add({ handleClose, showModal, onAdd }: Props) {
+function Add({ handleClose, onAdd }: Props) {
 
   const [user, setUser] = useState<User>(
     {

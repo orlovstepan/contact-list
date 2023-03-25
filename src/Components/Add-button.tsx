@@ -23,7 +23,7 @@ function AddButton({setUser,resetSearchValue}: Props) {
   return (
     <div>
         <button onClick={() => setShowModal(true)} className='btn-add'>Create contact</button>
-        {showModal && <Add onAdd={handleAdd} handleClose={handleClose} showModal={showModal} />}
+        {showModal && <Add onAdd={handleAdd} handleClose={handleClose} />}
     </div>
   )
 }

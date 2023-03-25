@@ -110,24 +110,24 @@ thead{
   transition: transform .2s;
 }
 
+.delete--enabled,
 .delete--disabled{
+  width: fit-content;
+  min-height: 4vh;
   border: transparent;
-  pointer-events: none;
   background-color: salmon;
-  opacity: 0.1;
   color: white;
   font-family: monospace;
   font-size:larger;
   font-weight: bolder;
 }
 
+.delete--disabled{
+  pointer-events: none;
+  opacity: 0.1;
+}
+
 .delete--enabled{
-  border: transparent;
-  font-family: monospace;
-  font-size:larger;
-  font-weight: bolder;
-  background-color: salmon;
-  color: white;
   transition: transform .2s;
 }
 
@@ -164,7 +164,7 @@ thead{
   background-color: #fafafa;
 }
 
-/* MODAL WINDOW */
+/* MODAL WINDOW ADD */
 
 .add-form-modal{
   position: absolute;
@@ -231,4 +231,40 @@ thead{
 .add-person--input{
   margin-top: 4%;
   height: 3.5vh;
+}
+
+/* MODAL WINDOW DELETE */
+
+.delete--modal{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left:0;
+  width: 100%;
+  min-height: 100%;
+  background: rgba(169, 169, 169, 0.5);
+}
+
+.delete--modal-content{
+  width: 20vw;
+  height: 20vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete--confirmation-text{
+  padding: 0 5%;
+  width: 90%;
+  height: 30%;
+}
+
+.delete--confirmation-buttons{
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
 }
