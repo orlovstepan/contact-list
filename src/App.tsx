@@ -5,15 +5,12 @@ import Table from "./Components/Table";
 import { useSelector, useDispatch } from 'react-redux'
 import { User, TypeSearch } from "./type";
 import { RootState } from "./store";
-import { addUser} from './store/user'
+import { addUser, addUsers, deleteUser} from './store/user'
 
 export default function App() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [value, setValue] = useState("");
-  const [type, setSearchType] = useState<TypeSearch>("name");
-  const [checked, setChecked] = useState<number[]>([]);
   const dispatch = useDispatch();
 
+  const { users } = useSelector((state: RootState) => state.userState)
 
   const filterUsers = (searchValue: string, users: User[]) => {
     return users.filter((user) =>
@@ -24,7 +21,7 @@ export default function App() {
   const fetchUsers = () => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((res) => res.json())
-      .then((data) => setUsers(data));
+      .then((data) => dispatch(addUsers(data)));
   };
 
   useEffect(() => {
@@ -37,17 +34,15 @@ export default function App() {
 
   const onAdd = (user: User) => {
     dispatch(addUser(user))
-    setUsers([...users, user]);
   };
 
-  const onDelete = (checked: number[]) => {
-    setUsers(users.filter((user) => !checked.includes(user.id)));
-    setChecked([]);
-  };
+  // const onDelete = (checked: number[]) => {
+  //   setUsers(users.filter((user) => !checked.includes(user.id)));
+  //   setChecked([]);
+  // };
+  
 
-  const store = useSelector((state: RootState) => state)
-
-  console.log('store', store)
+  
 
   return (
     <main className="App">
@@ -58,7 +53,6 @@ export default function App() {
         checked={checked}
         handleChange={onChange}
         handleChangeType={setSearchType}
-        deleteUser={onDelete}
       />
       <Table
         checked={checked}

@@ -1,24 +1,30 @@
 import { useState } from "react";
 import { User } from "../type";
 import { useSelector, useDispatch } from 'react-redux'
+import { setChecked } from '../store/user';
+
 
 type Props = {
   checked: number[],
-  setChecked: (value: ((ids: number[]) => void) | number[]) => void,
+  // setChecked: (value: ((ids: number[]) => void) | number[]) => void,
   users: User[],
 };
 
 function Table({
   checked,
-  setChecked,
+  // setChecked,
   users,
 }: Props) {
 
+  const dispatch = useDispatch();
+
   const handleCheckEach = (id: number) => {
     const value = checked.filter((userId) => id !== userId);
-    setChecked((prev) =>
-      prev.includes(id) ? value : [...prev, id]
-    );
+    // setChecked((prev) =>
+    //   prev.includes(id) ? value : [...prev, id]
+    // );
+
+    dispatch(setChecked(checked.includes(id) ? value : [...checked, id]))
   };
 
   const list = useSelector(state => state.users)

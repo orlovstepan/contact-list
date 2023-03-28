@@ -98,22 +98,22 @@ thead{
 
 .btn-add{
   width: fit-content;
-  min-height: 4vh;
+  min-height: 5vh;
   margin-left: 3%;
-  padding: 0 5%;
+  padding: 0 20%;
   background-color: rgb(220, 255, 220);
   border: 0;
   border-radius: 5px;
   font-family: monospace;
-  font-size:larger;
   font-weight: bolder;
+  font-size: 0.8rem;
   transition: transform .2s;
 }
 
 .delete--enabled,
 .delete--disabled{
   width: fit-content;
-  min-height: 4vh;
+  min-height: 5vh;
   border: transparent;
   background-color: salmon;
   color: white;
