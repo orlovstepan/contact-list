@@ -4,7 +4,6 @@ import { setSearchValue, setSearchType } from '..//store/filter'
 import AddButton from './Add-button';
 import DeleteButton from './Delete-button';
 import { RootState } from '../store';
-import { setChecked,deleteUser } from '../store/user';
 
 function Searchbar() {
   const dispatch = useDispatch();
@@ -18,11 +17,6 @@ function Searchbar() {
     dispatch(setSearchType(value))
   }
 
-  const onDelete = () => {
-    dispatch(deleteUser(checked))
-    dispatch(setChecked([]))
-  };
-
   return (
     <div className='topBar'>
         <div className='searchbar'>
@@ -34,8 +28,8 @@ function Searchbar() {
         </select>
         </div>
         <div className='topBar--buttons'>
-        <DeleteButton checked={checked} deleteUser={onDelete} />
-        <AddButton setUser={setUser} resetSearchValue={resetSearchValue} />
+        <DeleteButton />
+        <AddButton />
         </div>
     </div>
   )

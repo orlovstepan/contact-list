@@ -2,39 +2,22 @@ import { useState } from "react";
 import { User } from "../type";
 import { useSelector, useDispatch } from 'react-redux'
 import { setChecked } from '../store/user';
+import { RootState } from "../store";
 
-
-type Props = {
-  checked: number[],
-  // setChecked: (value: ((ids: number[]) => void) | number[]) => void,
-  users: User[],
-};
-
-function Table({
-  checked,
-  // setChecked,
-  users,
-}: Props) {
+function Table() {
 
   const dispatch = useDispatch();
+  const { users, checked } = useSelector((state: RootState) => state.userState)
 
   const handleCheckEach = (id: number) => {
     const value = checked.filter((userId) => id !== userId);
-    // setChecked((prev) =>
-    //   prev.includes(id) ? value : [...prev, id]
-    // );
-
     dispatch(setChecked(checked.includes(id) ? value : [...checked, id]))
   };
 
-  const list = useSelector(state => state.users)
-
-  console.log('....', list)
-
-  const handleCheckAll = (e: any) => {
-    setChecked(
+  const handleCheckAll = () => {
+    dispatch(setChecked(
       users.length === checked.length ? [] : users.map((user) => user.id)
-    );
+    ));
   };
 
   const [copied, setCopied] = useState('');
@@ -63,7 +46,7 @@ function Table({
         {users.map((user, index) => <tr id={index % 2 ? "even" : "odd"} key={user.id} className="container" >
           <td>
             <input name="check--individual"
-              onChange={(e) => handleCheckEach(user.id)}
+              onChange={() => handleCheckEach(user.id)}
               checked={checked.includes(user.id) ? true : false}
               type={'checkbox'} />
           </td>

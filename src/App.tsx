@@ -1,25 +1,32 @@
-import "./App.css";
-import { useState, useEffect } from "react";
-import Searchbar from "./Components/Searchbar";
-import Table from "./Components/Table";
-import { useSelector, useDispatch } from 'react-redux'
-import { User, TypeSearch } from "./type";
-import { RootState } from "./store";
-import { addUser, addUsers, deleteUser} from './store/user'
+import './App.css';
+import { useEffect } from 'react';
+import Searchbar from './Components/Searchbar';
+import Table from './Components/Table';
+import { useSelector, useDispatch } from 'react-redux';
+import { User } from './type';
+import { RootState } from './store';
+import { addUsers, addUser } from './store/user';
+import { setSearchValue } from './store/filter';
 
 export default function App() {
   const dispatch = useDispatch();
 
-  const { users } = useSelector((state: RootState) => state.userState)
+  const { users } = useSelector((state: RootState) => state.userState);
+  const { searchValue, searchType } = useSelector((state: RootState) => state.filterState);
 
-  const filterUsers = (searchValue: string, users: User[]) => {
-    return users.filter((user) =>
-      user[type].toLowerCase().includes(searchValue.toLowerCase())
-    );
+  const filterUsers = (searchValue: string, users: User[], searchType: string) => {
+    return users.filter((user) => {
+      const value = user[searchType];
+      if (typeof value === 'string') { 
+        return value.toLowerCase().includes(searchValue.toLowerCase());
+      }
+      return false; 
+    });
   };
+  
 
   const fetchUsers = () => {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch('https://jsonplaceholder.typicode.com/users')
       .then((res) => res.json())
       .then((data) => dispatch(addUsers(data)));
   };
@@ -28,37 +35,10 @@ export default function App() {
     fetchUsers();
   }, []);
 
-  const onChange = (value: string) => {
-    setValue(value);
-  };
-
-  const onAdd = (user: User) => {
-    dispatch(addUser(user))
-  };
-
-  // const onDelete = (checked: number[]) => {
-  //   setUsers(users.filter((user) => !checked.includes(user.id)));
-  //   setChecked([]);
-  // };
-  
-
-  
-
   return (
     <main className="App">
-      <Searchbar
-        resetSearchValue={setValue}
-        setUser={onAdd}
-        value={value}
-        checked={checked}
-        handleChange={onChange}
-        handleChangeType={setSearchType}
-      />
-      <Table
-        checked={checked}
-        setChecked={setChecked}
-        users={filterUsers(value, users)}
-      />
+      <Searchbar/>
+      <Table />
     </main>
   );
 }

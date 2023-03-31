@@ -29,6 +29,6 @@ export interface FilterState {
     },
   })
   
-  export const { setSearchValue, setSearchType } = filterSlice.actions
+  export const { setSearchValue, setSearchType, resetFilter } = filterSlice.actions
   
   export default filterSlice.reducer

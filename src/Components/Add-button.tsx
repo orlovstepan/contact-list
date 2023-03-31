@@ -1,19 +1,22 @@
 import {useState} from 'react'
 import { User } from '../type'
 import Add from './Add';
+import { useSelector, useDispatch } from 'react-redux'
+import { addUser } from '../store/user';
+import { resetFilter } from '../store/filter';
 
-type Props = {
-  setUser: (user: User) => void,
-  resetSearchValue: (value: string) => void,
-}
 
-function AddButton({setUser,resetSearchValue}: Props) {
+function AddButton() {
+
+  const dispatch = useDispatch();
 
   const [showModal, setShowModal] = useState(false);
 
+
+
   const handleAdd = (user: User) => {
-    resetSearchValue("");
-    setUser(user);
+    dispatch(resetFilter())
+    dispatch(addUser(user))
     handleClose();
   }
 

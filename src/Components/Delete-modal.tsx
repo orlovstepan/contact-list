@@ -1,15 +1,25 @@
+import { setChecked } from "../store/user";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+import { deleteUser } from "../store/user";
+import { useDispatch } from "react-redux";
+
 type Props = {
-    checked: number[],
-    deleteUser: (checked: number[]) => void,
     handleClose: () => void,
 }
 
-function DeleteModal({deleteUser, checked, handleClose}: Props) {
+function DeleteModal({ handleClose}: Props) {
+    
+    const dispatch = useDispatch();
+
+    const { checked } = useSelector((state: RootState) => state.userState)
 
     function handleDelete(){
-        deleteUser(checked);
+        dispatch(deleteUser(checked));
         handleClose();
     }
+
+
   return (
     <div className="delete--modal"> 
             <div className="delete--modal-content">

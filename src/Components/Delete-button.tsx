@@ -1,15 +1,13 @@
-// ADD CONFIRMATION MODAL
-
 import { useState } from "react";
 import DeleteModal from "./Delete-modal";
+import { useSelector } from "react-redux";
+import { setChecked } from "../store/user";
+import { RootState } from "../store";
 
 
-type Props = {
-    checked: number[],
-    deleteUser: (checked: number[]) => void,
-}
+function DeleteButton() {
 
-function DeleteButton({checked, deleteUser}: Props) {
+  const { checked } = useSelector((state: RootState) => state.userState)
 
     const [showModal, setShowModal] = useState<Boolean>(false);
 
@@ -21,7 +19,7 @@ function DeleteButton({checked, deleteUser}: Props) {
   return (
     <div className="delete-container">
         <button onClick={()=>setShowModal(!showModal)} className={checked.length ? 'delete--enabled' : 'delete--disabled'}>Delete</button>
-        {showModal && <DeleteModal deleteUser={deleteUser} checked={checked} handleClose={handleClose} />}
+        {showModal && <DeleteModal handleClose={handleClose} />}
     </div>
   )
 }
