@@ -76,6 +76,7 @@ thead{
   border-bottom: 1px solid lightgray;
 } 
 
+
 .info,
 .label{
   padding-left: 1vw;
@@ -267,4 +268,27 @@ thead{
   width: 70%;
   display: flex;
   justify-content: space-evenly;
+}
+
+/* Favourites */
+
+.user-favourite-icon{
+  width: 1vw;
+  visibility: hidden;
+  align-self: center;
+}
+
+.info:hover .user-favourite-icon {
+  visibility: visible;
+}
+
+.favourites-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.favourites--button{
+  background-color: transparent;
+  border: none;
 }

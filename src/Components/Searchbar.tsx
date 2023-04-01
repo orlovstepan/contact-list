@@ -1,14 +1,14 @@
-import { User, TypeSearch } from '../type'
+import { TypeSearch } from '../type'
 import { useSelector, useDispatch } from 'react-redux'
 import { setSearchValue, setSearchType } from '..//store/filter'
 import AddButton from './Add-button';
 import DeleteButton from './Delete-button';
 import { RootState } from '../store';
+import Favourites from './Favourites';
 
 function Searchbar() {
   const dispatch = useDispatch();
   const { searchValue } = useSelector((state: RootState) => state.filterState)
-  const { checked } = useSelector((state: RootState) => state.userState)
 
   const handleChange = (value: string) => {
     dispatch(setSearchValue(value))
@@ -30,6 +30,7 @@ function Searchbar() {
         <div className='topBar--buttons'>
         <DeleteButton />
         <AddButton />
+        <Favourites />
         </div>
     </div>
   )

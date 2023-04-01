@@ -5,11 +5,13 @@ import type {User} from "../type"
 export interface UserState {
   users: User[],
   checked: number[], 
+  favourite: number[]
 }
 
 const initialState: UserState = {
   users: [],
   checked: [],
+  favourite: []
 }
 
 export const usersSlice = createSlice({
@@ -29,10 +31,13 @@ export const usersSlice = createSlice({
     setChecked: (state: UserState, action: PayloadAction<number[]>) =>{
       return {...state, checked: action.payload }
     },
+    setFavourite: (state: UserState, action: PayloadAction<number[]>) =>{
+      return{...state, favourite: action.payload}
+    }
     
   },
 })
 
-export const { addUser, addUsers, deleteUser, setChecked } = usersSlice.actions
+export const { addUser, addUsers, deleteUser, setChecked, setFavourite } = usersSlice.actions
 
 export default usersSlice.reducer
