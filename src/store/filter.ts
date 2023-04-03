@@ -5,12 +5,14 @@ import type {TypeSearch} from "../type"
 
 export interface FilterState {
     searchValue: string,
-    searchType: TypeSearch
+    searchType: TypeSearch,
+    showFavourite: boolean
   }
   
   const initialState: FilterState = {
     searchValue: "",
-    searchType: "name"
+    searchType: "name",
+    showFavourite: false
   }
   
   export const filterSlice = createSlice({
@@ -26,9 +28,12 @@ export interface FilterState {
       resetFilter: () => {
         return initialState
       },
+      setShowFavourite: (state: FilterState, action: PayloadAction<boolean>) => {
+        return {...state, showFavourite: action.payload}
+      }
     },
   })
   
-  export const { setSearchValue, setSearchType, resetFilter } = filterSlice.actions
+  export const { setSearchValue, setSearchType, resetFilter, setShowFavourite } = filterSlice.actions
   
   export default filterSlice.reducer

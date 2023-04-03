@@ -4,12 +4,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setChecked, setFavourite } from '../store/user';
 import { RootState } from "../store";
 
-
 function Table() {
 
   const dispatch = useDispatch();
   const { users, checked, favourite } = useSelector((state: RootState) => state.userState)
-  const { searchValue, searchType } = useSelector((state: RootState) => state.filterState)
+  const { searchValue, searchType, showFavourite } = useSelector((state: RootState) => state.filterState)
 
   console.log('favourite', favourite);
 
@@ -42,6 +41,9 @@ function Table() {
 
   const filterUsers = (searchValue: string, users: User[], searchType: string) => {
     return users.filter((user) => {
+      if(showFavourite && favourite.length>0){
+        return favourite.includes(user.id);
+      }
       const value = user[searchType];
       if (typeof value === 'string') { 
         return value.toLowerCase().includes(searchValue.toLowerCase());
@@ -51,6 +53,7 @@ function Table() {
   };
 
   const filteredUsers = filterUsers(searchValue, users, searchType);
+  
 
   return (
     <table className="table" >

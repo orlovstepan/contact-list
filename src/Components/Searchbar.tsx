@@ -28,9 +28,9 @@ function Searchbar() {
         </select>
         </div>
         <div className='topBar--buttons'>
+        <Favourites />
         <DeleteButton />
         <AddButton />
-        <Favourites />
         </div>
     </div>
   )
