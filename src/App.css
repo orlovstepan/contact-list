@@ -272,11 +272,16 @@ thead{
 
 /* Favourites */
 
-.user-favourite-icon{
+.user-favourite-icon,
+.user-favourite-icon-on{
   width: 1vw;
-  visibility: hidden;
   align-self: center;
 }
+
+.user-favourite-icon{
+  visibility: hidden;
+}
+
 
 .info:hover .user-favourite-icon {
   visibility: visible;

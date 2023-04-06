@@ -77,7 +77,7 @@ function Table() {
         
           <td className="info" id='name'>
             <img onClick={() => handleFavourite(user.id)} 
-            className="user-favourite-icon"
+            className={favourite.includes(user.id) ? 'user-favourite-icon-on' : 'user-favourite-icon' }
             src={favourite.includes(user.id) ? 'favorite.png' : 'star.png' } /> 
             {user.name} </td>
           <td className="info">{user.phone} </td>

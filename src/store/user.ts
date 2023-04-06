@@ -26,7 +26,8 @@ export const usersSlice = createSlice({
     },
     deleteUser: (state: UserState, action: PayloadAction<number[]>) =>{
       const newUsers = state.users.filter((user) => !action.payload.includes(user.id))
-      return {...state, users: newUsers}
+      const newFavourites = state.favourite.filter((userId) => !action.payload.includes(userId));
+      return {...state, users: newUsers, checked: [], favourite: newFavourites}
     },
     setChecked: (state: UserState, action: PayloadAction<number[]>) =>{
       return {...state, checked: action.payload }

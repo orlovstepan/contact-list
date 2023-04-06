@@ -1,4 +1,3 @@
-import { setChecked } from "../store/user";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { deleteUser } from "../store/user";
