@@ -234,6 +234,12 @@ thead{
   height: 3.5vh;
 }
 
+.phone--update{
+  top:0;
+  left:0;
+  background-color: black;
+}
+
 /* MODAL WINDOW DELETE */
 
 .delete--modal{
@@ -308,4 +314,16 @@ thead{
   font-family: monospace;
   font-size:larger;
   font-weight: bolder;
+}
+
+/* EDIT FUNCTIONALITY */
+
+.user--edit-button{
+  width: 0.8vw;
+  visibility: hidden;
+}
+
+.info:hover .user--edit-button{
+  visibility: visible;
+  cursor: pointer;
 }

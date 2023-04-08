@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import {
   createBrowserRouter,
   RouterProvider,
+  Route
 } from "react-router-dom";
 import Favourites from './Components/Favourites'
 
@@ -23,9 +24,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store}>
-   <RouterProvider router={router} // <App /> 
-   />
+      <Provider store={store}>
+            <RouterProvider router={router} >
+              <Route path="/"/>
+              </RouterProvider>
       </Provider>
   </React.StrictMode>
 )

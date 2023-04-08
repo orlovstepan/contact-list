@@ -10,8 +10,6 @@ function Table() {
   const { users, checked, favourite } = useSelector((state: RootState) => state.userState)
   const { searchValue, searchType, showFavourite } = useSelector((state: RootState) => state.filterState)
 
-  console.log('favourite', favourite);
-
   const handleCheckEach = (id: number) => {
     const value = checked.filter((userId) => id !== userId);
     dispatch(setChecked(checked.includes(id) ? value : [...checked, id]))
@@ -76,15 +74,16 @@ function Table() {
           </td>
         
           <td className="info" id='name'>
+            <img src='edit.png' className="user--edit-button" />
             <img onClick={() => handleFavourite(user.id)} 
             className={favourite.includes(user.id) ? 'user-favourite-icon-on' : 'user-favourite-icon' }
             src={favourite.includes(user.id) ? 'favorite.png' : 'star.png' } /> 
             {user.name} </td>
           <td className="info">{user.phone} </td>
-          <td className="info" id="email" onClick={() => copyEmail(user.email)}
+          <td className="info" id="email" 
           >
             {user.email}
-            <img src={copied === user.email ? "tick.png" : "copy.png"} className="copy" />
+            <img onClick={() => copyEmail(user.email)} src={copied === user.email ? "tick.png" : "copy.png"} className="copy" />
           </td>
         </tr>)}
       </tbody>
